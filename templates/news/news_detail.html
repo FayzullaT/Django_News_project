@@ -1,0 +1,13 @@
+{% extends 'news/base.html' %}
+
+{% block title %}{{news.title}}{% endblock title %}
+{% block content %}
+  <div class="position-absolute text-center">
+    <h1 class="mx-5">{{news.title}}</h1>
+    <img src="{{news.image.url}}" alt="">
+    <p class="display-4">{{news.body}}</p>
+
+  </div>
+  
+
+{% endblock content %}
