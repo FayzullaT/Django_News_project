@@ -1,3 +1,4 @@
+from audioop import reverse
 from lib2to3.fixes.fix_input import context
 # from msilib.schema import ListView
 from tkinter.font import names
@@ -5,7 +6,8 @@ from tkinter.font import names
 from Tools.scripts.patchcheck import status
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, ListView
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, UpdateView, DeleteView, CreateView
 from unicodedata import category
 
 from .forms import ContactForm
@@ -128,3 +130,18 @@ class SportNewsList(ListView):
     def get_queryset(self):
         news = self.model.published.all().filter(category__name = 'Sport')
         return news
+
+class NewsUpdateView(UpdateView):
+    model = News
+    fields = ('title', 'body', 'image', 'category', 'status')
+    template_name = 'crud/news_edit.html'
+
+class NewsDeleteView(DeleteView):
+    model = News
+    template_name = 'crud/news_delete.html'
+    success_url = reverse_lazy('home_page')
+
+class NewsCreateView(CreateView):
+    model = News
+    template_name = 'crud/news_create.html'
+    fields = ('title', 'slug' , 'body', 'image', 'category', 'status')

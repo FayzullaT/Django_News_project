@@ -8,6 +8,9 @@
     <p class="display-4">{{news.body}}</p>
 
   </div>
-  
+  <div class="card-footer text-center">
+    <a href="{% url "news_update" news.slug%}">Tahrirlash</a>
+    <a href="{% url "news_delete" news.slug%}">Uchirish</a>
+  </div>
 
 {% endblock content %}
